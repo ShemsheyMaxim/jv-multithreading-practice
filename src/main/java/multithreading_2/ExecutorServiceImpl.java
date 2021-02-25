@@ -1,4 +1,4 @@
-package service;
+package multithreading_2;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
