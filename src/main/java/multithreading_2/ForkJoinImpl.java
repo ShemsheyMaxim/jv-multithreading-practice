@@ -7,7 +7,7 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
 public class ForkJoinImpl extends RecursiveTask<Integer> {
-    private static final int THRESHOLD = Runtime.getRuntime().availableProcessors();
+    private static final int THRESHOLD = 100;
     private final List<Integer> list;
 
     public ForkJoinImpl(List<Integer> list) {

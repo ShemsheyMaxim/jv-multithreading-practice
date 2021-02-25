@@ -19,7 +19,7 @@ public class ExecutorServiceImpl {
     public int execute() {
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         List<List<Integer>> listOfSubLists = ListUtils.partition(list,
-                list.size() / THREAD_POOL_SIZE);
+                list.size() >= THREAD_POOL_SIZE ? list.size() / THREAD_POOL_SIZE: list.size());
         List<CalculatorSumCallableImpl> callables = listOfSubLists.stream()
                 .map(CalculatorSumCallableImpl::new)
                 .collect(Collectors.toList());
@@ -27,7 +27,6 @@ public class ExecutorServiceImpl {
             List<Future<Integer>> futures = executorService.invokeAll(callables);
             executorService.shutdown();
             int sum = 0;
-//            futures.stream().mapToInt(Future::get).sum();
             for (Future<Integer> future : futures) {
                 sum += future.get();
             }
