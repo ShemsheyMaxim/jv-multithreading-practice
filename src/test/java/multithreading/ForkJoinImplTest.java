@@ -1,4 +1,4 @@
-package multithreading_2;
+package multithreading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ForkJoinImplTest {
     private static final int SUM_POSITIVE_NUMBER = 10;
-    private static final int SUM_NEGATIVE_NUMBER = -10;
+    private static final int SUM_NEGATIVE_NUMBER = -1_000_000;
     private static final int SUM_ZERO_NUMBER = 0;
     private static final int WRONG_RESULT = 12;
     private static List<Integer> listNumbers;
+    private static InitializeList initializeList;
 
     @BeforeAll
     public static void beforeAll() {
         listNumbers = new ArrayList<>();
+        initializeList = new InitializeList();
     }
 
     @Test
@@ -37,7 +39,7 @@ public class ForkJoinImplTest {
 
     @Test
     public void checkCalculateSumOfNegativeValuesFromListOK() {
-        listNumbers = List.of(-1, -2, -3, -4);
+        listNumbers = initializeList.initList(-1);
         ForkJoinImpl forkJoin = new ForkJoinImpl(listNumbers);
         int actual = forkJoin.compute();
         assertEquals(SUM_NEGATIVE_NUMBER, actual);

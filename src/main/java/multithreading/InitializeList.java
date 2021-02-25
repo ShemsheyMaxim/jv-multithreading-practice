@@ -1,4 +1,4 @@
-package multithreading_2;
+package multithreading;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package multithreading_2;
+package multithreading;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
