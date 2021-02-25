@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ForkJoinImplTest {
-    private static final int SUM_POSITIVE_NUMBER = 10;
+    private static final int SUM_POSITIVE_NUMBER = 1_000_000;
     private static final int SUM_NEGATIVE_NUMBER = -1_000_000;
     private static final int SUM_ZERO_NUMBER = 0;
     private static final int WRONG_RESULT = 12;
@@ -23,7 +23,7 @@ public class ForkJoinImplTest {
 
     @Test
     public void checkCalculateSumOfPositiveValuesFromListOK() {
-        listNumbers = List.of(1, 2, 3, 4);
+        listNumbers = initializeList.initList(1);
         ForkJoinImpl forkJoin = new ForkJoinImpl(listNumbers);
         int actual = forkJoin.compute();
         assertEquals(SUM_POSITIVE_NUMBER, actual);
@@ -31,7 +31,7 @@ public class ForkJoinImplTest {
 
     @Test
     public void checkCalculateSumOfZeroValuesFromListOK() {
-        listNumbers = List.of(0, 0, 0, 0);
+        listNumbers = initializeList.initList(0);
         ForkJoinImpl forkJoin = new ForkJoinImpl(listNumbers);
         int actual = forkJoin.compute();
         assertEquals(SUM_ZERO_NUMBER, actual);
@@ -45,6 +45,7 @@ public class ForkJoinImplTest {
         assertEquals(SUM_NEGATIVE_NUMBER, actual);
     }
 
+    @Test
     public void checkCalculateSumOfValueNotEquals() {
         ForkJoinImpl forkJoin = new ForkJoinImpl(listNumbers);
         int actual = forkJoin.compute();
