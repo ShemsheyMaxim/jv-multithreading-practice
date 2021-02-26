@@ -1,6 +1,7 @@
 package multithreading;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,7 +21,7 @@ public class ExecutorServiceImpl {
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         List<List<Integer>> listOfSubLists = ListUtils.partition(list,
                 list.size() >= THREAD_POOL_SIZE ? list.size() / THREAD_POOL_SIZE : list.size());
-        List<CalculatorSumCallableImpl> callables = listOfSubLists.stream()
+        List<Callable<Integer>> callables = listOfSubLists.stream()
                 .map(CalculatorSumCallableImpl::new)
                 .collect(Collectors.toList());
         try {
